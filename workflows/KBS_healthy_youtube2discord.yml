@@ -12,8 +12,8 @@ jobs:
         id: prepare
         run: |
           TITLE="${{on.youtube.outputs.title}}"
-          # Replace ' and " with escaped versions
-          ESCAPED_TITLE=$(echo "$TITLE" | sed "s/'/\\\'/g" | sed 's/"/\\"/g')
+          ESCAPED_TITLE="${TITLE//\'/\\\'}"
+          ESCAPED_TITLE="${ESCAPED_TITLE//\"/\\\"}"
           echo "Escaped title: $ESCAPED_TITLE"
           echo "::set-output name=escaped_title::$ESCAPED_TITLE"
       - name: Discord notification
